@@ -36,6 +36,10 @@
 				$('.imgbag .clipimg').css({"clip":"rect("+top+"px,"+(left+vwidth)+"px,"+(top+vheight)+"px,"+left+")"});
 			});
 		});
+		$("body").on("mouseup",function(){
+			$("body").off('mousemove');
+			$('.imgbag').off('mousemove');
+		});
 		function putmove($viewport){
 			var startX;
 			var startY;
@@ -51,14 +55,13 @@
 					var czY=e.clientY-startY+curY;
 					$viewport.css({"left":czX+"px","top":czY+"px"});
 					$viewport.prevAll(".clipimg").css({"clip":"rect("+czY+"px,"+(czX+vwidth)+"px,"+(czY+vheight)+"px,"+czX+"px)"});
-//					console.log(curX+"鼠标移动"+e.clientX+"Y轴"+e.clientY);
+				//	console.log(curX+"鼠标移动"+e.clientX+"Y轴"+e.clientY);
 				});
 			});
 		}
-		$("body").on("mouseup",function(){
-			$("body").off('mousemove');
-			$('.imgbag').off('mousemove');
-		});
+		function showView(){
+			
+		}
 	}
 })(jQuery);
 $(".niceimg").xq_catimg();
