@@ -18,12 +18,13 @@
 		var imgleft=self.offset().left;
 		var defaults={
 			"imgwidth":400,//设置图片最大宽度  默认200px
-			"imgheight":600//设置图片最大高度  默认200px
+			"imgheight":600,//设置图片最大高度  默认200px
+			"showview":true,//设置图片预览区域
 		}
 		$.extend(defaults, options);
 		this,init();
 		function init(){
-			self.parent().append('<div class="imgbag" style="width:'+defaults.imgwidth+'px;height:'+defaults.imgheight+'px"></div>');
+			self.parent().append('<div class="imgbag" style="width:'+defaults.imgwidth+'px;height:'+defaults.imgheight+'px"></div><div class="viewimg"></div>');
 			self.appendTo("div.imgbag");
 			$(".imgbag").append('<img src="'+src+'" class="clipimg" ondragstart="return false"/><div class="viewport"><span class="ltop"></span><span class="top"></span><span class="rtop"></span><span class="lcen"></span><span class="rcen"></span><span class="lbot"></span><span class="bot"></span><span class="rbot"></span></div>');
 			if((defaults.imgwidth/width) >(defaults.imgheight/height)){
@@ -57,6 +58,8 @@
 			startY=e.clientY;
 			left=startX-imgleft;
 			top=startY-imgtop;
+			$(".viewimg").html('<img src="'+src+'" class="showview" ondragstart="return false"/>');
+			$(".viewimg").css({"top":(imgtop+10)+"px","left":(imgleft+width+20)+"px","position":"fixed"});
 			$('.imgbag').on('mousemove',function(e){
 				if (keytype) {
 					return;
@@ -73,6 +76,7 @@
 				vheight=Math.abs(nheight);
 				$('.imgbag .viewport').css({"top":top+"px","left":left+"px","width":vwidth+"px","height":vheight+"px"});
 				$('.imgbag .clipimg').css({"clip":"rect("+(top-chaY)+"px,"+(left+vwidth-chaX)+"px,"+(top+vheight-chaY)+"px,"+(left-chaX)+")"});
+				showView();
 			});
 		});
 		function putmove($viewport){
@@ -87,8 +91,11 @@
 					if (keytype) {
 						return;
 					}
+					console.log("移动");
 					var czX=e.clientX-startX+curX;
 					var czY=e.clientY-startY+curY;
+					top=czY;
+					left=czX;
 					$viewport.css({"left":czX+"px","top":czY+"px"});
 					$viewport.prevAll(".clipimg").css({"clip":"rect("+(czY-chaY)+"px,"+(czX+vwidth-chaX)+"px,"+(czY+vheight-chaY)+"px,"+(czX-chaX)+"px)"});
 				});
@@ -96,6 +103,7 @@
 		}
 		function showView(){
 			
+			$(".showview").css({"position":"absolute","clip":"rect("+(top-chaY)+"px,"+(left+vwidth-chaX)+"px,"+(top+vheight-chaY)+"px,"+(left-chaX)+")"});
 		}
 		$(window).on("mousemove",function(e){
 			if(!ifkeydown || !keytype){
