@@ -93,9 +93,16 @@
 	</head>
 	<body>
 		<div class="test">
-			<img src="img/rp.jpg" class="niceimg" ondragstart="return false"/>
+			<img src="img/rp7.jpg" class="niceimg" ondragstart="return false"/>
 		</div>
+		<div><input type="button" onclick="doclick()" value="确定裁剪"></div>
 	</body>
 	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 	<script type="text/javascript" src="js/xq_catimg.js"></script>
+	<script>
+		$(".niceimg").xq_catimg();
+		function doclick(){
+			console.log(xq_catimg.getCatData());
+		}
+	</script>
 </html>
