@@ -19,16 +19,18 @@
 		var imgtop=self.offset().top;
 		var imgleft=self.offset().left;
 		var defaults={
-			"imgwidth":500,//设置图片最大宽度  默认200px
-			"imgheight":400,//设置图片最大高度  默认200px
-			"showview":true,//设置图片预览区域
+			"imgwidth"	:500,	//设置图片最大宽度  默认200px
+			"imgheight"	:400,	//设置图片最大高度  默认200px
+			"showview"	:true,	//设置图片预览区域
+			"pclass"	:"",	//包容裁剪图片容器的样式
+			"openmb"	:false	//是否开启移动端裁剪支持
 		}
 		$.extend(defaults, options);
 		init();
 		function init(){
 			self.parent().append('<div class="imgbag" style="width:'+defaults.imgwidth+'px;height:'+defaults.imgheight+'px"></div><div class="viewimg"></div>');
 			self.appendTo("div.imgbag");
-			$(".imgbag").append('<img src="'+src+'" class="clipimg" ondragstart="return false"/><div class="viewport"><span class="ltop"></span><span class="top"></span><span class="rtop"></span><span class="lcen"></span><span class="rcen"></span><span class="lbot"></span><span class="bot"></span><span class="rbot"></span></div>');
+			$(".imgbag").append('<img src="'+src+'" class="clipimg" ondragstart="return false"/><div class="viewport" style="display:none"><span class="ltop"></span><span class="top"></span><span class="rtop"></span><span class="lcen"></span><span class="rcen"></span><span class="lbot"></span><span class="bot"></span><span class="rbot"></span></div>');
 			if((defaults.imgwidth/width) >(defaults.imgheight/height)){
 				var left=width*defaults.imgheight/height;
 				$(".imgbag img").css({"height":defaults.imgheight,"margin-left":-left/2,"margin-top":-defaults.imgheight/2});
