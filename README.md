@@ -47,4 +47,6 @@ var datajson=xq_catimg.getCatData();//这个时候参数已经将数据存在了
 </pre>
 我们只需要把原始图片的路径和这些一起传给后台。这个图片就算截取完成了。
 
+源码：https://github.com/topqiang/xq_catimg
+
 虽然还有众多不足，我也会不断去完善它的。希望各路大神指点指点。
